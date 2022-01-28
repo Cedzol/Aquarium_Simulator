@@ -4,23 +4,28 @@ public class Aquarium {
 
 
     private boolean isSweetWater;
-    private int[][] sizeOfTank;
+    private static String[][] sizeOfTank;
 
 
 
     public Aquarium(boolean isSweetWater, int sizeX, int sizeY){
         this.isSweetWater = isSweetWater;
-        this.sizeOfTank = new int[sizeY][sizeX];
+        this.sizeOfTank = new String[sizeY][sizeX];
+        for (int i = 0; i < sizeY; i++) {
+            for (int j = 0; j < sizeX; j++) {
+                Aquarium.sizeOfTank[i][j] ="~";
+            }
+        }
     }
 
-    public int[][] getSizeOfAq(){
+    public static String[][] getSizeOfAq(){
         return sizeOfTank;
     }
 
-    public void setFishPosition(int x_Position, int y_Position){
-
-         sizeOfTank[y_Position][x_Position] = 4 ;
+    public static void setFishPosition(int x_Position, int y_Position){
+         sizeOfTank[y_Position][x_Position] = Fish.getFishSymbol();
     }
+
 
 
 
