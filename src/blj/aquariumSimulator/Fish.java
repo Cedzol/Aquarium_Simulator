@@ -7,7 +7,6 @@ import static blj.aquariumSimulator.Aquarium.moveFishPosition;
 import static blj.aquariumSimulator.Aquarium.setFishPosition;
 
 
-
 public class Fish {
 
     static ArrayList<Fish> fishes = new ArrayList<>();
@@ -18,7 +17,7 @@ public class Fish {
     private static boolean isSaltWater;
     private static String symbol = "3";
 
-    public Fish(String name, int x_Position, int y_Position, boolean isSaltWaterwater, String symbol){
+    public Fish(String name, int x_Position, int y_Position, boolean isSaltWaterwater, String symbol) {
         this.name = name;
         this.x_Position = x_Position;
         this.y_Position = y_Position;
@@ -26,7 +25,7 @@ public class Fish {
         this.symbol = symbol;
     }
 
-    public static void removeFish(){
+    public static void removeFish() {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welchen Fisch möchtest du entfernen? Name: ");
@@ -38,7 +37,7 @@ public class Fish {
 
     }
 
-    public static void moveTo(){
+    public static void moveTo() {
 
         int index = 0;
 
@@ -51,37 +50,35 @@ public class Fish {
 
         System.out.println("Zu welcher Y Koordinate möchtest du den Fisch bewegen?");
         int y = scanner.nextInt();
+        Aquarium.getSizeOfAq()[y_Position][x_Position] = "~";
 
-        for(Object o : list) {
-            if (getFishName().equals(fishNameToMove)) {
-                return i;
-            }
-            i++;
-        }
-
-        moveFishPosition(x, y, index) ;
+        moveFishPosition(x, y);
     }
 
-    public static String getFishSymbol(){
+    public static String getFishSymbol() {
         return symbol;
     }
 
-    public static String getFishName(){
+    public static String getFishName() {
         return name;
     }
 
 
-
-    public static int getXPosition(){
+    public static int getXPosition() {
         return x_Position;
     }
 
-    public static int getYPosition(){
+    public static int getYPosition() {
         return y_Position;
     }
 
+    public static boolean isIsSaltWater() {
+        return isSaltWater;
+    }
 
-    public static Fish createFish(){
+    public static Fish createFish() {
+
+
         Scanner sc = new Scanner(System.in);
 
 
@@ -97,18 +94,35 @@ public class Fish {
         System.out.println("Salzwasser Fisch? (True/false)  ");
         boolean livesInSaltWater = sc.nextBoolean();
 
+
         System.out.println("Geben sie das Symbol des Fisches ein  ");
         String fishSymbol = sc.next();
 
 
         Fish newFish = new Fish(name = fishName, x_Position = FishX_Position, y_Position = FischY_Position, isSaltWater = livesInSaltWater, symbol = fishSymbol);
+
+
         return newFish;
+
 
     }
 
+    public static void deadFish() {
+
+
+        if (Aquarium.isSweetWater() && Fish.isSaltWater || !Aquarium.isSweetWater() && !Fish.isSaltWater) {
+            System.out.println("Dein Fisch ist im falschen Wasser gestorben!");
+            Aquarium.getSizeOfAq()[y_Position][x_Position] = "~";
+            fishes.removeIf(s -> s.equals(Fish.createFish()));
+        }
+
+
+
+
+    }
 
     public static void askForFish() {
-        while(1 == 1) {
+        while (1 == 1) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Möchtets du einen weiteren Fisch hinzufügen?  Ja / Nein");
             if (!scanner.hasNext("Nein")) {
@@ -142,6 +156,7 @@ public class Fish {
 
             if (scanner.hasNext("1")) {
                 askForFish();
+                deadFish();
             } else if (scanner.hasNext("2")) {
                 Fish.removeFish();
             } else if (scanner.hasNext("3")) {
@@ -155,7 +170,6 @@ public class Fish {
             }
         }
     }
-
 
 
 }

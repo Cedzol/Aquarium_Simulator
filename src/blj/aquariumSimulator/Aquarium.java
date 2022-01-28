@@ -3,7 +3,7 @@ package blj.aquariumSimulator;
 public class Aquarium {
 
 
-    private boolean isSweetWater;
+    private static boolean isSweetWater;
     private static String[][] sizeOfTank;
 
 
@@ -30,10 +30,11 @@ public class Aquarium {
 
 
 
-    public static void moveFishPosition(int x_Position, int y_Position, int indexOfFishToMove){
+    public static void moveFishPosition(int x_Position, int y_Position){
 
+        Aquarium.getSizeOfAq()[y_Position][x_Position] = "~";
 
-        sizeOfTank[y_Position][x_Position] = Fish.fishes.get(indexOfFishToMove).getFishSymbol();
+        sizeOfTank[y_Position][x_Position] = Fish.getFishSymbol();
     }
 
 
@@ -46,6 +47,10 @@ public class Aquarium {
             }
             System.out.println();
         }
+    }
+
+    public static boolean isSweetWater() {
+        return isSweetWater;
     }
 
 

@@ -11,6 +11,8 @@ public class Starter {
 
 
         Aquarium myAquarium = new Aquarium(false, 4, 7);
+
+
         Fish.menu();
 
 
