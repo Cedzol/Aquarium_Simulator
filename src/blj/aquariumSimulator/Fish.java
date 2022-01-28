@@ -116,9 +116,6 @@ public class Fish {
             fishes.removeIf(s -> s.equals(Fish.createFish()));
         }
 
-
-
-
     }
 
     public static void askForFish() {
