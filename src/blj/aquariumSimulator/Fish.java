@@ -26,7 +26,15 @@ public class Fish {
     }
 
     public static void removeFish(){
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welchen Fisch möchtest du entfernen? Name: ");
+        String fishNameToRemove = scanner.nextLine();
+
+        fishes.removeIf(s -> s.equals(fishNameToRemove));
+
         Aquarium.getSizeOfAq()[y_Position][x_Position] = "~";
+
     }
 
     public static void moveTo(int x, int y){
@@ -37,6 +45,12 @@ public class Fish {
     public static String getFishSymbol(){
         return symbol;
     }
+
+    public static String getFishName(){
+        return name;
+    }
+
+
 
     public static int getXPosition(){
         return x_Position;
@@ -67,30 +81,19 @@ public class Fish {
         String fishSymbol = sc.next();
 
 
-        fishes.add(new Fish(name = fishName, x_Position = FishX_Position, y_Position = FischY_Position, isSaltWater = livesInSaltWater, symbol = fishSymbol));
-        return new Fish(name = fishName, x_Position = FishX_Position, y_Position = FischY_Position, isSaltWater = livesInSaltWater, symbol = fishSymbol);
-
-
+        Fish newFish = new Fish(name = fishName, x_Position = FishX_Position, y_Position = FischY_Position, isSaltWater = livesInSaltWater, symbol = fishSymbol);
+        return newFish;
 
     }
 
-    public static void printAquarium(Aquarium myAquarium){
-        for (int row = 0; row < Aquarium.getSizeOfAq().length; row++) {
-            for (int col = 0; col < Aquarium.getSizeOfAq()[row].length; col++) {
-                System.out.printf("%4s", Aquarium.getSizeOfAq()[row][col]);
-            }
-            System.out.println();
-        }
-    }
 
-    public static void askForFisch() {
+    public static void askForFish() {
         while(1 == 1) {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Möchtets du einen Fisch hinzufügen?  Ja / Nein");
+            System.out.println("Möchtets du einen weiteren Fisch hinzufügen?  Ja / Nein");
             if (!scanner.hasNext("Nein")) {
                 createFish();
                 setFishPosition(getXPosition(), getYPosition());
-
             }
 
             if (scanner.hasNext("Nein")) {
@@ -98,5 +101,50 @@ public class Fish {
             }
         }
     }
+
+    public static void menu() {
+
+
+        int xcord = 0;
+        int ycord = 0;
+
+        while (1 == 1) {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("---------------------------------------");
+            System.out.println("Was möchtest du machen?");
+            System.out.println("---------------------------------------");
+            System.out.println("Fische hinzufügen: [1]");
+            System.out.println("Fische entfernen: [2]");
+            System.out.println("Fische bewegen: [3]");
+            System.out.println("Aquarium ausgeben: [4]");
+            System.out.println("---------------------------------------");
+
+            if (scanner.hasNext("1")) {
+                askForFish();
+            } else if (scanner.hasNext("2")) {
+                Fish.removeFish();
+            } else if (scanner.hasNext("3")) {
+                System.out.println("Gib die X coordinate an: ");
+                if (scanner.hasNextInt()) {
+                    xcord = scanner.nextInt();
+                }
+
+                System.out.println("Gib die Y coordinate an: ");
+                if (scanner.hasNextInt()) {
+                    ycord = scanner.nextInt();
+                }
+                moveTo(xcord, ycord);
+            } else if (scanner.hasNext("4")) {
+                Aquarium.printAquarium();
+            }
+
+            if (scanner.hasNext("quit")) {
+                break;
+            }
+        }
+    }
+
+
 
 }

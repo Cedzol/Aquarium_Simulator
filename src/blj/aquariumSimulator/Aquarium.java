@@ -26,7 +26,14 @@ public class Aquarium {
          sizeOfTank[y_Position][x_Position] = Fish.getFishSymbol();
     }
 
-
+    public static void printAquarium(){
+        for (int row = 0; row < Aquarium.getSizeOfAq().length; row++) {
+            for (int col = 0; col < Aquarium.getSizeOfAq()[row].length; col++) {
+                System.out.printf("%4s", Aquarium.getSizeOfAq()[row][col]);
+            }
+            System.out.println();
+        }
+    }
 
 
 }
