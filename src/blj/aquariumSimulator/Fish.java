@@ -3,6 +3,7 @@ package blj.aquariumSimulator;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static blj.aquariumSimulator.Aquarium.moveFishPosition;
 import static blj.aquariumSimulator.Aquarium.setFishPosition;
 
 
@@ -37,9 +38,28 @@ public class Fish {
 
     }
 
-    public static void moveTo(int x, int y){
-        Aquarium.getSizeOfAq()[y_Position][x_Position] = "~";
-        setFishPosition(x, y);
+    public static void moveTo(){
+
+        int index = 0;
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welchen Fisch möchtest du bewegen? Name: ");
+        String fishNameToMove = scanner.nextLine();
+
+        System.out.println("Zu welcher X Koordinate möchtest du den Fisch bewegen?");
+        int x = scanner.nextInt();
+
+        System.out.println("Zu welcher Y Koordinate möchtest du den Fisch bewegen?");
+        int y = scanner.nextInt();
+
+        for(Object o : list) {
+            if (getFishName().equals(fishNameToMove)) {
+                return i;
+            }
+            i++;
+        }
+
+        moveFishPosition(x, y, index) ;
     }
 
     public static String getFishSymbol(){
@@ -125,16 +145,7 @@ public class Fish {
             } else if (scanner.hasNext("2")) {
                 Fish.removeFish();
             } else if (scanner.hasNext("3")) {
-                System.out.println("Gib die X coordinate an: ");
-                if (scanner.hasNextInt()) {
-                    xcord = scanner.nextInt();
-                }
-
-                System.out.println("Gib die Y coordinate an: ");
-                if (scanner.hasNextInt()) {
-                    ycord = scanner.nextInt();
-                }
-                moveTo(xcord, ycord);
+                moveTo();
             } else if (scanner.hasNext("4")) {
                 Aquarium.printAquarium();
             }

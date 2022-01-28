@@ -23,13 +23,26 @@ public class Aquarium {
     }
 
     public static void setFishPosition(int x_Position, int y_Position){
+
+
          sizeOfTank[y_Position][x_Position] = Fish.getFishSymbol();
     }
+
+
+
+    public static void moveFishPosition(int x_Position, int y_Position, int indexOfFishToMove){
+
+
+        sizeOfTank[y_Position][x_Position] = Fish.fishes.get(indexOfFishToMove).getFishSymbol();
+    }
+
+
+
 
     public static void printAquarium(){
         for (int row = 0; row < Aquarium.getSizeOfAq().length; row++) {
             for (int col = 0; col < Aquarium.getSizeOfAq()[row].length; col++) {
-                System.out.printf("%4s", Aquarium.getSizeOfAq()[row][col]);
+                System.out.printf("%6s", Aquarium.getSizeOfAq()[row][col]);
             }
             System.out.println();
         }
